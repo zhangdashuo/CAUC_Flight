@@ -1,0 +1,46 @@
+    /*旋钮控制位置模式切换方式*/  
+    /* 定高模式切换 由AUX1三档控制*/
+    /* 辅助1通道在1000-1299 */
+    if( CH_filter[AUX1] < -200 )
+        /* ，非定高模式 */
+        height_ctrl_mode = 0;
+    /* 辅助1通道在1300-1699 */
+    else if( CH_filter[AUX1] < 200 )
+        /* 气压定高模式 */
+        height_ctrl_mode = 1;
+    /* 辅助1通道在1700-2000 */
+    else
+    {
+        /* 超声波定高模式 */
+        if(ultra_ok == 1)
+            height_ctrl_mode = 2;
+        /* 没有超声波就是气压定高模式 */
+        else
+            height_ctrl_mode = 1;
+    }
+	
+	/* 位置模式切换 由AUX2三档控制*/
+    /* 辅助2通道在1000-1299 */
+    if( CH_filter[AUX2] > -200 && CH_filter[AUX2] < 200)
+        /* 不悬停模式 */
+        position_ctrl_mode = 1;
+    /* 辅助2通道在1300-1699 */
+    else if( CH_filter[AUX2] < -200 )
+	{
+        /* 航向锁定模式 */
+        if(gpsx.fixmode >= 2)
+            position_ctrl_mode = 2;
+        /* 没有接收到GPS信号则切换为不悬停模式 */
+        else
+            position_ctrl_mode = 1;
+	}
+    /* 辅助2通道在1700-2000 */
+    else
+    {
+        /* GPS定位模式 */
+        if(gpsx.fixmode >= 2)
+            position_ctrl_mode = 3;
+        /* 没有接收到GPS信号则切换为不悬停模式 */
+        else
+            position_ctrl_mode = 1;
+    }
