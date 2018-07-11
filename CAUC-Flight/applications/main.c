@@ -4,7 +4,7 @@
 *@version V1.0
 *@date  2018/5/24
 *@brief 主函数文件
-*@design 无人机研究小组
+*@design 无人机研究小组 上传至github进行共同研发
 	     谈政政   朱通    赵志华   邓丽萍  张硕
 *
 *@all copyright reserved 中国民航大学 机器人研究所
