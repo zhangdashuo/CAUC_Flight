@@ -1,46 +1,46 @@
-    /*��ť����λ��ģʽ�л���ʽ*/  
-    /* ����ģʽ�л� ��AUX1��������*/
-    /* ����1ͨ����1000-1299 */
+    /*旋钮控制位置模式切换方式*/  
+    /* 定高模式切换 由AUX1三档控制*/
+    /* 辅助1通道在1000-1299 */
     if( CH_filter[AUX1] < -200 )
-        /* ���Ƕ���ģʽ */
+        /* ，非定高模式 */
         height_ctrl_mode = 0;
-    /* ����1ͨ����1300-1699 */
+    /* 辅助1通道在1300-1699 */
     else if( CH_filter[AUX1] < 200 )
-        /* ��ѹ����ģʽ */
+        /* 气压定高模式 */
         height_ctrl_mode = 1;
-    /* ����1ͨ����1700-2000 */
+    /* 辅助1通道在1700-2000 */
     else
     {
-        /* ����������ģʽ */
+        /* 超声波定高模式 */
         if(ultra_ok == 1)
             height_ctrl_mode = 2;
-        /* û�г�����������ѹ����ģʽ */
+        /* 没有超声波就是气压定高模式 */
         else
             height_ctrl_mode = 1;
     }
 	
-	/* λ��ģʽ�л� ��AUX2��������*/
-    /* ����2ͨ����1000-1299 */
+	/* 位置模式切换 由AUX2三档控制*/
+    /* 辅助2通道在1000-1299 */
     if( CH_filter[AUX2] > -200 && CH_filter[AUX2] < 200)
-        /* ����ͣģʽ */
+        /* 不悬停模式 */
         position_ctrl_mode = 1;
-    /* ����2ͨ����1300-1699 */
+    /* 辅助2通道在1300-1699 */
     else if( CH_filter[AUX2] < -200 )
 	{
-        /* ��������ģʽ */
+        /* 航向锁定模式 */
         if(gpsx.fixmode >= 2)
             position_ctrl_mode = 2;
-        /* û�н��յ�GPS�ź����л�Ϊ����ͣģʽ */
+        /* 没有接收到GPS信号则切换为不悬停模式 */
         else
             position_ctrl_mode = 1;
 	}
-    /* ����2ͨ����1700-2000 */
+    /* 辅助2通道在1700-2000 */
     else
     {
-        /* GPS��λģʽ */
+        /* GPS定位模式 */
         if(gpsx.fixmode >= 2)
             position_ctrl_mode = 3;
-        /* û�н��յ�GPS�ź����л�Ϊ����ͣģʽ */
+        /* 没有接收到GPS信号则切换为不悬停模式 */
         else
             position_ctrl_mode = 1;
     }
